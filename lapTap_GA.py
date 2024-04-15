@@ -8,6 +8,7 @@ storage_prices = {size: 0.5 * size for size in [128, 256, 512, 1024, 2048]}  # 1
 gpu_prices = {size: 20 * size for size in [2, 4, 8, 16]}  # 2GB부터 16GB까지 
 
 
+
 # 데이터셋 생성 함수 ----> 필요없음
 def generate_dataset(n):
     dataset = []
