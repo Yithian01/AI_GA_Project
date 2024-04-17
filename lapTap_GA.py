@@ -1,6 +1,5 @@
 import random
-
-
+import pandas as pd
 # 부품별 가격 범위 설정
 cpu_prices = {generation: 100 * generation for generation in range(1, 11)}  # 1세대부터 10세대까지 
 ram_prices = {size: 10 * size for size in [4, 8, 16, 32, 64]}  # 4GB부터 64GB까지 
@@ -8,6 +7,11 @@ storage_prices = {size: 0.5 * size for size in [128, 256, 512, 1024, 2048]}  # 1
 gpu_prices = {size: 20 * size for size in [2, 4, 8, 16]}  # 2GB부터 16GB까지 
 
 
+
+print(f'cpu_prices = {cpu_prices}')
+print(f'ram_prices = {ram_prices}')
+print(f'storage_prices = {storage_prices}')
+print(f'gpu_prices = {gpu_prices}')
 
 # 데이터셋 생성 함수 ----> 필요없음
 def generate_dataset(n):
@@ -28,10 +32,9 @@ def generate_dataset(n):
             "price": price
         })
     return dataset
-
 # 예제 데이터셋 생성 -- 초기 개체군 
-dataset = generate_dataset(100)
-print(dataset[:5])  # 처음 5개의 데이터를 출력
+#dataset = generate_dataset(100)
+#print(dataset[:5])  # 처음 5개의 데이터를 출력
 
 
 '''적응도 함수'''
@@ -107,6 +110,7 @@ def run_ga(items, target_price, population_size=100, generations=50):
     best_individual = population[best_index]
     return best_individual, best_fitness
 
+
 # 부품별 가격 범위 설정
 items = [
     list(cpu_prices.values()),  # CPU 가격
@@ -115,11 +119,14 @@ items = [
     list(gpu_prices.values())  # GPU 가격
 ]
 
+
 # 사용자로부터 목표 가격 입력 받기
-target_price = int(input("목표 가격을 입력하세요: "))
+target_price = int(input("목표 가격을 입력하세요: (만원)"))
+
 
 # 유전 알고리즘 실행하여 최적의 구성 찾기
 best_configuration, best_fitness = run_ga(items, target_price, population_size=100, generations=50)
+
 
 # 결과 출력
 print(f"가장 적합한 구성의 적응도: {best_fitness}")
